@@ -1,0 +1,541 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>AdminLTE 3 | Dashboard</title>
+    <!-- Tell the browser to be responsive to screen width -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="/plugins/fontawesome-free/css/all.min.css">
+    <!-- Ionicons -->
+    <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+    <!-- Tempusdominus Bbootstrap 4 -->
+    <link rel="stylesheet" href="/plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css">
+    <!-- iCheck -->
+    <link rel="stylesheet" href="/plugins/icheck-bootstrap/icheck-bootstrap.min.css">
+    <!-- JQVMap -->
+    <link rel="stylesheet" href="/plugins/jqvmap/jqvmap.min.css">
+    <!-- Theme style -->
+    <link rel="stylesheet" href="/dist/css/adminlte.min.css">
+    <!-- overlayScrollbars -->
+    <link rel="stylesheet" href="/plugins/overlayScrollbars/css/OverlayScrollbars.min.css">
+    <!-- Daterange picker -->
+    <link rel="stylesheet" href="/plugins/daterangepicker/daterangepicker.css">
+    <!-- summernote -->
+    <link rel="stylesheet" href="/plugins/summernote/summernote-bs4.css">
+    <!-- Google Font: Source Sans Pro -->
+    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+    <link rel="stylesheet" href="/assert/bootstrap-table/bootstrap-table.min.css">
+
+
+
+</head>
+<body class="hold-transition sidebar-mini layout-fixed">
+<div class="wrapper">
+
+    <!-- Navbar -->
+    <nav class="main-header navbar navbar-expand navbar-white navbar-light">
+        <!-- Left navbar links -->
+        <ul class="navbar-nav">
+            <li class="nav-item">
+                <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
+            </li>
+            <li class="nav-item d-none d-sm-inline-block">
+                <a href="#" class="nav-link">Home</a>
+            </li>
+            <li class="nav-item d-none d-sm-inline-block">
+                <a href="#" class="nav-link">Contact</a>
+            </li>
+        </ul>
+
+        <!-- SEARCH FORM -->
+        <form class="form-inline ml-3">
+            <div class="input-group input-group-sm">
+                <input class="form-control form-control-navbar" type="search" placeholder="Search" aria-label="Search">
+                <div class="input-group-append">
+                    <button class="btn btn-navbar" type="submit">
+                        <i class="fas fa-search"></i>
+                    </button>
+                </div>
+            </div>
+        </form>
+
+        <!-- Right navbar links -->
+        <ul class="navbar-nav ml-auto">
+            <a href="/emp/logout">logout</a>
+            <li class="nav-item">
+                <a class="nav-link" data-widget="control-sidebar" data-slide="true" href="#" role="button">
+                    <i class="fas fa-th-large"></i>
+                </a>
+            </li>
+        </ul>
+    </nav>
+    <!-- /.navbar -->
+
+    <!-- Main Sidebar Container -->
+    <aside class="main-sidebar sidebar-dark-primary elevation-4">
+        <!-- Brand Logo -->
+        <a href="#" class="brand-link">
+            <img src="/dist/img/AdminLTELogo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3"
+                 style="opacity: .8">
+            <span class="brand-text font-weight-light">AdminLTE 3</span>
+        </a>
+        <!-- Sidebar -->
+        <div class="sidebar">
+            <!-- Sidebar user panel (optional) -->
+            <div class="user-panel mt-3 pb-3 mb-3 d-flex">
+                <div class="image">
+                    <img src="/dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
+                </div>
+                <div class="info">
+                    <a class="d-block"><p id="name"></p></a>
+                </div>
+            </div>
+
+            <!-- Sidebar Menu -->
+            <nav class="mt-2">
+                <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+                    <!-- Add icons to the links using the .nav-icon class
+                         with font-awesome or any other icon font library -->
+                    <li class="nav-item has-treeview">
+                        <a href="#" class="nav-link active">
+                            <p>
+                                Manage
+                                <i class="right fas fa-angle-left"></i>
+                            </p>
+                        </a>
+                        <ul id="menu" class="nav nav-treeview">
+
+                        </ul>
+                    </li>
+                    <li class="nav-item has-treeview">
+                        <a href="#" class="nav-link active">
+                            <p>
+                                System
+                                <i class="right fas fa-angle-left"></i>
+                            </p>
+                        </a>
+                        <ul class="nav nav-treeview">
+                            <li class="nav-item">
+                                <a href="/emp/information" class="nav-link">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p>reset your password</p>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+
+            </nav>
+            <!-- /.sidebar-menu -->
+        </div>
+        <!-- /.sidebar -->
+    </aside>
+
+    <!-- Content Wrapper. Contains page content -->
+    <div class="content-wrapper">
+        <!-- Content Header (Page header) -->
+        <div class="content-header">
+            <div class="container-fluid">
+                <div class="row mb-2">
+                    <div class="col-sm-6">
+                        <h1 class="m-0 text-dark">Rights_Management</h1>
+                    </div><!-- /.col -->
+                    <div class="col-sm-6">
+                        <ol class="breadcrumb float-sm-right">
+                            <li class="breadcrumb-item"><a href="/main">Home</a></li>
+                            <li class="breadcrumb-item active">Rights_Management</li>
+                        </ol>
+                    </div><!-- /.col -->
+                </div><!-- /.row -->
+            </div><!-- /.container-fluid -->
+        </div>
+        <!-- /.content-header -->
+
+        <!-- Main content -->
+        <table id="table1"></table>
+        <div id="button" >
+            <input type="button" value="authorization" class="btn btn-success" onclick="onshow()"
+                    data-toggle="modal" data-target="#showModel">
+            <input type="button" value="delAuthorization" class="btn btn-success" onclick="newshow()"
+                   data-toggle="modal" data-target="#showModel1">
+            <input type="button" value="updateRole" class="btn btn-primary" onclick="show()"
+                   data-toggle="modal" data-target="#editModel" >
+<!--            <input type="button" value="del" class="btn btn-danger"  onclick="del()">-->
+<!--            <input type="button" value="updateRole" class="btn btn-danger"  onclick="reset()">-->
+            <input type="button" value="resetPassword" class="btn btn-danger"  onclick="reset()">
+        </div>
+
+
+        <div class="modal fade" id="editModel" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog" >
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                        <h3 id="myModalLabel">edit</h3>
+                    </div>
+                    <div class="modal-body">
+                        <form id="editForm">
+                            <table class="table table-bordered table-striped"  width="800px">
+                                <tr>
+                                    <td>role</td>
+                                    <td>
+                                        <select id="role"></select>
+                                    </td>
+                                </tr>
+                            </table>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button class="btn btn-success" data-dismiss="modal" aria-hidden="true" onclick="edit()" >save</button>
+                        <button class="btn btn-default" data-dismiss="modal" aria-hidden="true">close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="modal fade" id="showModel" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog" >
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                        <h3>authorization</h3>
+                    </div>
+                    <div class="modal-body">
+                        <form id="showForm">
+                            <table class="table table-bordered table-striped"  width="800px">
+                                <tr>
+                                    <td>role</td>
+                                    <td>
+                                        <select id="roleid"></select>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>authorization</td>
+                                    <td>
+                                        <select id="authorization"></select>
+                                    </td>
+                                </tr>
+                            </table>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button class="btn btn-success" data-dismiss="modal" aria-hidden="true" onclick="submit()" >save</button>
+                        <button class="btn btn-default" data-dismiss="modal" aria-hidden="true">close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="modal fade" id="showModel1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog" >
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                        <h3>authorization</h3>
+                    </div>
+                    <div class="modal-body">
+                        <form id="showForm1">
+                            <table class="table table-bordered table-striped"  width="800px">
+                                <tr>
+                                    <td>role</td>
+                                    <td>
+                                        <select id="roleid1"></select>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>authorization</td>
+                                    <td>
+                                        <select id="authorization1"></select>
+                                    </td>
+                                </tr>
+                            </table>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button class="btn btn-success" data-dismiss="modal" aria-hidden="true" onclick="submit1()" >save</button>
+                        <button class="btn btn-default" data-dismiss="modal" aria-hidden="true">close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- /.content -->
+    </div>
+    <!-- /.content-wrapper -->
+    <footer class="main-footer">
+        <strong>Copyright &copy; 2014-2019 <a href="http://adminlte.io">AdminLTE.io</a>.</strong>
+        All rights reserved.
+        <div class="float-right d-none d-sm-inline-block">
+            <b>Version</b> 3.0.5
+        </div>
+    </footer>
+
+    <!-- Control Sidebar -->
+    <aside class="control-sidebar control-sidebar-dark">
+        <!-- Control sidebar content goes here -->
+    </aside>
+    <!-- /.control-sidebar -->
+</div>
+<!-- ./wrapper -->
+
+<!-- jQuery -->
+<script src="/assert/js/jquery.js"></script>
+<!-- jQuery UI 1.11.4 -->
+<script src="/plugins/jquery-ui/jquery-ui.min.js"></script>
+<!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
+<script>
+    $.widget.bridge('uibutton', $.ui.button)
+</script>
+<!-- Bootstrap 4 -->
+<script src="/plugins/bootstrap/js/bootstrap.js"></script>
+<script src="/assert/bootstrap-table/bootstrap-table.min.js"></script>
+<script src="/assert/bootstrap-table/bootstrap-table-zh-CN.min.js"></script>
+<!-- ChartJS -->
+<script src="/plugins/chart.js/Chart.min.js"></script>
+<!-- Sparkline -->
+<script src="/plugins/sparklines/sparkline.js"></script>
+<!-- JQVMap -->
+<!--<script src="/plugins/jqvmap/jquery.vmap.min.js"></script>-->
+<!--<script src="/plugins/jqvmap/maps/jquery.vmap.usa.js"></script>-->
+<!-- jQuery Knob Chart -->
+<script src="/plugins/jquery-knob/jquery.knob.min.js"></script>
+<!-- daterangepicker -->
+<script src="/plugins/moment/moment.min.js"></script>
+<script src="/plugins/daterangepicker/daterangepicker.js"></script>
+<!-- Tempusdominus Bootstrap 4 -->
+<script src="/plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js"></script>
+<!-- Summernote -->
+<script src="/plugins/summernote/summernote-bs4.min.js"></script>
+<!-- overlayScrollbars -->
+<script src="/plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script>
+<!-- AdminLTE App -->
+<script src="/dist/js/adminlte.js"></script>
+<!-- AdminLTE dashboard demo (This is only for demo purposes) -->
+<script src="/dist/js/pages/dashboard.js"></script>
+<!-- AdminLTE for demo purposes -->
+<script src="/dist/js/demo.js"></script>
+<script type="text/javascript">
+    $(function () {
+
+        getName();
+        person();
+        emp();
+        getMenu();
+        list();
+    });
+
+    function emp() {
+        $("#table1").bootstrapTable({
+            url:"/admin/ListAll",
+            method:"post",
+            contentType : "application/x-www-form-urlencoded",
+            dataType:"JSON",
+            pageNumber:1,
+            pageSize:4,
+            pageList:[4],
+            pagination:true,
+            sidePagination: "server",
+            columns:[
+                {checkbox:true},
+                {field:"empid",title:"empid"},
+                {field:"username",title:"username"},
+                {field: "password",title: "password"},
+                {field:"tel",title:"tel"},
+                {field:"email",title:"email"}
+            ],
+            queryParams:function (params) {
+                return{
+                    "page":(params.offset/params.limit)+1,
+                }
+            },
+            responseHandler:function (result) {
+                return {
+                    "total":result.total,
+                    "rows":result.list
+                };
+            }
+        })
+        $("#button").removeAttr("hidden");
+    }
+
+    function getName() {
+        $.get("/emp/getName",{},function (result) {
+            $("#name").text(result.username)
+        },"json")
+    }
+    function getMenu(){
+        $.get("/menus",{},function (result) {
+            console.log(result);
+            $.each(result, function (i, e) {
+                $("#menu").append(`<li class="nav-item">
+                                <a href=${e.purl} class="nav-link">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p>${e.pname}</p>
+                                </a>
+                            </li>`)
+            }, "json")
+        })
+    }
+
+    function getRefresh() {
+        $("#table1").bootstrapTable('refresh');
+    }
+
+    function showEdit() {
+        // 获取当前行
+        var rows=$("#table1").bootstrapTable('getSelections');
+        if(rows.length===1){
+            modify=1;
+            $("#editForm").show();
+            $.get("/emp/SelectById",{empid:rows[0].empid},function (result) {
+                console.log(result)
+                $("#empid").val(result.list[0].empid)
+                $("#username").val(result.list[0].username);
+                $("#password").val(result.list[0].password);
+                $("#tel").val(result.list[0].tel);
+                $("#email").val(result.list[0].email);
+            },"json");
+        }
+        else {alert("chose a information")}
+        document.getElementById("editForm").reset();
+    }
+
+    function edit() {
+        var rows=$("#table1").bootstrapTable('getSelections');
+        if(rows.length===1){
+            console.log(rows[0].empid)
+            $.ajax({type:"post",url:"/admin/updateRole",data:{empid:rows[0].empid,
+                    roleId:$("#role option:selected").val()},
+                success:function (res) {
+                    if(res==="true"){
+                        alert("success");
+                        getRefresh();
+                    }
+                    else if (res.indexOf("error")!==-1){alert("without authorization")}
+                    else {alert("false")}
+                }
+            })
+        }
+    }
+
+    function person() {
+        $.get("/admin/role",{},function (result) {
+            //<option value=""></option>
+            $.each(result,function (i,e) {
+                $("#role").append(`<option value="${e.roleId}">${e.rolename}</option>`)
+                $("#roleid").append(`<option value="${e.roleId}">${e.rolename}</option>`)
+                $("#roleid1").append(`<option value="${e.roleId}">${e.rolename}</option>`)
+            })
+        },"json")
+    }
+
+
+    function del() {
+        // 获取当前行
+        var rows = $("#table1").bootstrapTable('getSelections');
+        if (rows.length > 0) {
+            console.log(rows[0].empid);
+            if (confirm("confirm to delete?")) {
+                $.ajax({type:"get", url:"/Manager/delEmp", data:{"empid": rows[0].empid}, success:function (res) {
+                        console.log(res)
+                        if (res==="true"){
+                            alert("success");
+                            getRefresh();
+                        }else{
+                            alert("false");
+                            getRefresh();
+                        }
+                    }
+                })
+            }
+        } else {
+            alert("未选中行");
+        }
+    }
+
+    function reset() {
+        var rows = $("#table1").bootstrapTable('getSelections');
+        if (rows.length > 0) {
+            if (confirm("confirm to reset ?")) {
+            $.ajax({
+                type: "get", url: "/admin/resetPassword", data: {"empid": rows[0].empid},
+                success:function (res) {
+                    if (res ==="true") {
+                        alert("success");
+                        getRefresh();
+                    } else if (res.indexOf("error")!==-1){alert("without authorization")}
+                    else {
+                        alert("false");
+                        getRefresh();
+                    }
+                // },error:function (error) {
+                //     console.log(error);
+                //     if (error.responseText.indexOf("error")!==-1){alert("without authorization")}
+                }
+            })
+        }
+        } else {
+            alert("without select");
+        }
+    }
+
+
+
+
+    var modify=0;
+    function onshow() {
+        modify=0;
+        $("#showForm").show();
+
+    }
+
+    function newshow() {
+        modify=1;
+        $("#showForm1").show();
+        console.log(modify)
+    }
+
+    function list() {
+        $.ajax({url:"/admin/listAuthorization",type:"get",data:{},dataType: "json",
+        success:function (result) {
+            $.each(result,function (i,e) {
+                $("#authorization").append(`<option value="${e.permissionId}">${e.pname}</option>`)
+                $("#authorization1").append(`<option value="${e.permissionId}">${e.pname}</option>`)
+            })
+        }})
+    }
+
+    function submit() {
+            $.ajax({url:"/admin/authorization",type:"post",data:{roleId:$("#roleid option:selected").val(),
+                permissionId:$("#authorization option:selected").val()},success:function (result) {
+                if (result==="true"){
+                    alert("true");
+                    getRefresh();
+                }else if (result.indexOf("error")!==-1){alert("without authorization")}
+                else{
+                    alert("false");
+                    getRefresh();
+                }
+            }
+        })
+        }
+
+        function submit1(){
+            $.ajax({url:"/admin/delAuthorization",type:"post",data:{roleId:$("#roleid1 option:selected").val(),
+                permissionId:$("#authorization1 option:selected").val()},success:function (result) {
+                if (result==="true"){
+                    alert("success");
+                    getRefresh();
+
+                }else if (result.indexOf("error")!==-1){alert("without authorization")}
+                else{
+                    alert("false");
+                    getRefresh();
+                }
+            }
+        })
+    }
+
+
+
+</script>
+</body>
+</html>

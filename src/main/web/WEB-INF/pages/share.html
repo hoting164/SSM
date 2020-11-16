@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>AdminLTE 3 | Dashboard</title>
+    <!-- Tell the browser to be responsive to screen width -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="/plugins/fontawesome-free/css/all.min.css">
+    <!-- Ionicons -->
+    <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+    <!-- Tempusdominus Bbootstrap 4 -->
+    <link rel="stylesheet" href="/plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css">
+    <!-- iCheck -->
+    <link rel="stylesheet" href="/plugins/icheck-bootstrap/icheck-bootstrap.min.css">
+    <!-- JQVMap -->
+    <link rel="stylesheet" href="/plugins/jqvmap/jqvmap.min.css">
+    <!-- Theme style -->
+    <link rel="stylesheet" href="/dist/css/adminlte.min.css">
+    <!-- overlayScrollbars -->
+    <link rel="stylesheet" href="/plugins/overlayScrollbars/css/OverlayScrollbars.min.css">
+    <!-- Daterange picker -->
+    <link rel="stylesheet" href="/plugins/daterangepicker/daterangepicker.css">
+    <!-- summernote -->
+    <link rel="stylesheet" href="/plugins/summernote/summernote-bs4.css">
+    <!-- Google Font: Source Sans Pro -->
+    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+    <link href="/assert/css/bootstrap.css">
+    <link href="/plugins/bootstrap-table/bootstrap-table.min.css">
+</head>
+<body class="hold-transition sidebar-mini layout-fixed">
+<div class="wrapper">
+
+    <!-- Navbar -->
+    <nav class="main-header navbar navbar-expand navbar-white navbar-light">
+        <!-- Left navbar links -->
+        <ul class="navbar-nav">
+            <li class="nav-item">
+                <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
+            </li>
+            <li class="nav-item d-none d-sm-inline-block">
+                <a href="/main" class="nav-link">Home</a>
+            </li>
+            <li class="nav-item d-none d-sm-inline-block">
+                <a href="#" class="nav-link">Contact</a>
+            </li>
+        </ul>
+
+        <!-- SEARCH FORM -->
+        <form class="form-inline ml-3">
+            <div class="input-group input-group-sm">
+                <input class="form-control form-control-navbar" type="search" placeholder="Search" aria-label="Search">
+                <div class="input-group-append">
+                    <button class="btn btn-navbar" type="submit">
+                        <i class="fas fa-search"></i>
+                    </button>
+                </div>
+            </div>
+        </form>
+
+        <!-- Right navbar links -->
+        <ul class="navbar-nav ml-auto">
+            <a href="/emp/logout">logout</a>
+            <li class="nav-item">
+                <a class="nav-link" data-widget="control-sidebar" data-slide="true" href="#" role="button">
+                    <i class="fas fa-th-large"></i>
+                </a>
+            </li>
+        </ul>
+    </nav>
+    <!-- /.navbar -->
+
+    <!-- Main Sidebar Container -->
+    <aside class="main-sidebar sidebar-dark-primary elevation-4">
+        <!-- Brand Logo -->
+        <a href="#" class="brand-link">
+            <img src="/dist/img/AdminLTELogo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3"
+                 style="opacity: .8">
+            <span class="brand-text font-weight-light">AdminLTE 3</span>
+        </a>
+
+        <!-- Sidebar -->
+        <div class="sidebar">
+            <!-- Sidebar user panel (optional) -->
+            <div class="user-panel mt-3 pb-3 mb-3 d-flex">
+                <div class="image">
+                    <img src="/dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
+                </div>
+                <div class="info">
+                    <a href="#" class="d-block"><p id="username"></p></a>
+                </div>
+            </div>
+
+            <!-- Sidebar Menu -->
+            <nav class="mt-2">
+                <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+                    <!-- Add icons to the links using the .nav-icon class
+                         with font-awesome or any other icon font library -->
+                    <li class="nav-item has-treeview">
+                        <a href="#" class="nav-link active">
+                            <p>
+                                Manage
+                                <i class="right fas fa-angle-left"></i>
+                            </p>
+                        </a>
+                        <ul id="menu" class="nav nav-treeview">
+
+                        </ul>
+                    </li>
+                    <li class="nav-item has-treeview">
+                        <a href="#" class="nav-link active">
+                            <p>
+                                System
+                                <i class="right fas fa-angle-left"></i>
+                            </p>
+                        </a>
+                        <ul class="nav nav-treeview">
+                            <li class="nav-item">
+                                <a href="/emp/information" class="nav-link">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p>reset your password</p>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+
+            </nav>
+            <!-- /.sidebar-menu -->
+        </div>
+        <!-- /.sidebar -->
+    </aside>
+
+    <!-- Content Wrapper. Contains page content -->
+    <div class="content-wrapper">
+        <!-- Content Header (Page header) -->
+        <div class="content-header">
+            <div class="container-fluid">
+                <div class="row mb-2">
+                    <div class="col-sm-6">
+                        <h1 class="m-0 text-dark">Share_Customer</h1>
+                    </div><!-- /.col -->
+                    <div class="col-sm-6">
+                        <ol class="breadcrumb float-sm-right">
+                            <li class="breadcrumb-item"><a href="/main">Home</a></li>
+                            <li class="breadcrumb-item active">Share_Customer</li>
+                        </ol>
+                    </div><!-- /.col -->
+                </div><!-- /.row -->
+            </div><!-- /.container-fluid -->
+        </div>
+        <!-- /.content-header -->
+
+        <!-- Main content -->
+        <table id="table1"></table>
+        <input type="button" value="visit" class="btn btn-success" onclick="showEdit()"
+               data-toggle="modal" data-target="#editModel" id="input1">
+<!--        <input type="button" value="update" class="btn btn-primary" onclick="showEdit()"-->
+<!--               data-toggle="modal" data-target="#editModel" >-->
+<!--        <input type="button" value="del" class="btn btn-danger"  onclick="del()">-->
+
+        <div class="modal fade" id="editModel" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog" >
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                        <h3 id="myModalLabel">edit</h3>
+                    </div>
+                    <div class="modal-body">
+                        <form id="editForm">
+                            <table class="table table-bordered table-striped"  width="800px">
+                                <tr>
+                                    <td>cusName</td>
+                                    <td>
+                                        <input  class="form-control"  name="cusName" id="cusName" >
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>content</td>
+                                    <td>
+                                        <input  class="form-control"  name="content" id="content" >
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>date</td>
+                                    <td>
+                                        <input  class="form-control" type="date" name="date" id="date" >
+                                    </td>
+                                </tr>
+                            </table>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button class="btn btn-success" data-dismiss="modal" aria-hidden="true" onclick="visit()" >save</button>
+                        <button class="btn btn-default" data-dismiss="modal" aria-hidden="true">close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- /.content -->
+    </div>
+    <!-- /.content-wrapper -->
+    <footer class="main-footer">
+        <strong>Copyright &copy; 2014-2019 <a href="http://adminlte.io">AdminLTE.io</a>.</strong>
+        All rights reserved.
+        <div class="float-right d-none d-sm-inline-block">
+            <b>Version</b> 3.0.5
+        </div>
+    </footer>
+
+    <!-- Control Sidebar -->
+    <aside class="control-sidebar control-sidebar-dark">
+        <!-- Control sidebar content goes here -->
+    </aside>
+    <!-- /.control-sidebar -->
+</div>
+<!-- ./wrapper -->
+
+<!-- jQuery -->
+<script src="/plugins/jquery/jquery.min.js"></script>
+<!-- jQuery UI 1.11.4 -->
+<script src="/plugins/jquery-ui/jquery-ui.min.js"></script>
+<!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
+<script>
+    $.widget.bridge('uibutton', $.ui.button)
+</script>
+<!-- Bootstrap 4 -->
+<script src="/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script src="/plugins/bootstrap-table/bootstrap-table.min.js"></script>
+<script src="/plugins/bootstrap-table/bootstrap-table-zh-CN.min.js"></script>
+<!-- ChartJS -->
+<script src="/plugins/chart.js/Chart.min.js"></script>
+<!-- AdminLTE App -->
+<script src="/dist/js/adminlte.js"></script>
+<!-- AdminLTE for demo purposes -->
+<script src="/dist/js/demo.js"></script>
+<script type="text/javascript">
+    $(function () {
+        $("#table1").bootstrapTable({
+            url:"/customer/selectShared",
+            method:"post",
+            contentType : "application/x-www-form-urlencoded",
+            dataType:"JSON",
+            pageNumber:1,
+            pageSize:4,
+            pageList:[4],
+            pagination:true,
+            sidePagination: "server",
+            columns:[
+                {checkbox:true},
+                {field:"cusId",title:"cusId"},
+                {field:"cusName",title:"cusName"},
+                {field:"address",title:"address"},
+                {field:"contact",title:"contact"},
+                {field:"tel",title:"tel"},
+                {field:"email",title:"email"},
+                {field: "username",title: "owner"}
+            ],
+            queryParams:function (params) {
+                return{
+                    "page":(params.offset/params.limit)+1,
+                }
+            },
+            responseHandler:function (result) {
+                return {
+                    "total":result.total,
+                    "rows":result.list
+                };
+            }
+        })
+        person();
+        getName();
+        getMenu();
+    });
+
+    function getMenu(){
+        $.get("/menus",{},function (result) {
+            console.log(result);
+            $.each(result, function (i, e) {
+                $("#menu").append(`<li class="nav-item">
+                                <a href=${e.purl} class="nav-link">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p>${e.pname}</p>
+                                </a>
+                            </li>`)
+            }, "json")
+        })
+    }
+
+    function getName() {
+        $.get("/emp/getName",{},function (result) {
+            $("#username").text(result.username)
+        },"json")
+    }
+    function getRefresh() {
+        $("#table1").bootstrapTable('refresh');
+    }
+
+    var modify=0;//0新增  1修改
+    function show() {
+        document.getElementById("editForm").reset();
+        //显示表单
+        $("#editForm").show();
+        modify=0;
+    }
+
+    function showEdit() {
+        // 获取当前行
+        var rows=$("#table1").bootstrapTable('getSelections');
+        if(rows.length===1){
+            modify=1;
+            $("#editForm").show();
+            $.get("/customer/selectById",{cusId:rows[0].cusId},function (result) {
+                console.log(result)
+                $("#cusName").val(result.cusName);
+            },"json");
+        }
+        else{
+            alert("chose one list");
+        }
+        document.getElementById("editForm").reset();
+    }
+
+
+
+    function visit() {
+        $.ajax({type:"post",url:"/Visit/addVisit",data:{cusName:$("#cusName").val(),
+                content:$("#content").val(), date: $("#date").val()},
+            success:function (res) {
+                console.log(res);
+                if(res==="true"){
+                    alert("success");
+                    getRefresh();
+                }else{ alert("false")}
+            }
+        })
+    }
+    //动态加载部门下拉框
+    function person() {
+        $.get("/customer/selectAllEmp",{},function (result) {
+            //<option value=""></option>
+            $.each(result,function (i,e) {
+                $("#person_shared").append(`<option value="${e.empid}">${e.username}</option>`)
+            })
+        },"json")
+    }
+
+</script>
+</body>
+</html>

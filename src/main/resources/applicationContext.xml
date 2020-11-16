@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+    http://www.springframework.org/schema/beans/spring-beans-4.3.xsd
+    http://www.springframework.org/schema/tx
+    http://www.springframework.org/schema/tx/spring-tx-4.3.xsd
+    http://www.springframework.org/schema/context
+    http://www.springframework.org/schema/context/spring-context-4.3.xsd
+    http://www.springframework.org/schema/aop
+    http://www.springframework.org/schema/aop/spring-aop-4.3.xsd">
+
+
+    <context:component-scan base-package="com.ssm.*"/>
+    <context:property-placeholder location="classpath:db.properties" />
+
+    <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+        <property name="driverClassName" value="${jdbc.driverClassName}" />
+        <property name="url" value="${jdbc.url}" />
+        <property name="username" value="${jdbc.username}" />
+        <property name="password" value="${jdbc.password}" />
+    </bean>
+
+
+    <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+        <property name="dataSource" ref="dataSource"/>
+    </bean>
+
+    <tx:annotation-driven/>
+
+<!--    &lt;!&ndash;1.配置事务管理器&ndash;&gt;-->
+<!--    <bean id="txManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">-->
+<!--        <property name="dataSource" ref="dataSource"/>-->
+<!--    </bean>-->
+
+    <!--2.配置事务通知-->
+<!--    <tx:advice id="txAdvice" transaction-manager="transactionManager">-->
+<!--&lt;!&ndash;    <tx:attributes>&ndash;&gt;-->
+<!--&lt;!&ndash;    <tx:method name="select*" read-only="true"/>&ndash;&gt;-->
+<!--&lt;!&ndash;    <tx:method name="*" read-only="false"  />&ndash;&gt;-->
+<!--&lt;!&ndash;    </tx:attributes>&ndash;&gt;-->
+<!--    </tx:advice>-->
+<!--    &lt;!&ndash;3.配置AOP增强&ndash;&gt;-->
+<!--    <aop:config>-->
+<!--        <aop:pointcut id="pt1" expression="execution(* com.ssm.service.imp.*.*(..))"/>-->
+<!--        <aop:advisor advice-ref="txAdvice" pointcut-ref="pt1" />-->
+<!--    </aop:config>-->
+
+    <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+        <!--注入数据源 -->
+        <property name="dataSource" ref="dataSource" />
+        <!--指定核心配置文件位置 -->
+<!--        <property name="typeAliases" value="com.ssm.entity"/>-->
+
+        <!--配置PageHelper-->
+        <property name="plugins">
+            <array>
+                <bean class="com.github.pagehelper.PageInterceptor">
+                    <property name="properties">
+                        <value>
+                            <!--配置PageHelper-->
+                            offsetAsPageNum=true
+                            reasonable=true
+                            rowBoundsWithCount=true
+                            pageSizeZero=true
+                        </value>
+                    </property>
+                </bean>
+            </array>
+        </property>
+    </bean>
+
+    <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+        <!-- 注入sqlSessionFactory -->
+        <property name="basePackage" value="com.ssm.dao"/>
+        <property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"/>
+    </bean>
+
+    <!-- 自定义Realm -->
+    <bean id="myRealm" class="com.ssm.config.MyRealm"/>
+
+    <!-- 安全管理器 -->
+    <bean id="securityManager" class="org.apache.shiro.web.mgt.DefaultWebSecurityManager">
+        <property name="realm" ref="myRealm"/>
+    </bean>
+
+<!--    &lt;!&ndash; Shiro过滤器 &ndash;&gt;-->
+<!--    <bean id="shiroFilter" class="org.apache.shiro.spring.web.ShiroFilterFactoryBean">-->
+<!--        &lt;!&ndash; Shiro的核心安全接口,这个属性是必须的 &ndash;&gt;-->
+<!--        <property name="securityManager" ref="securityManager"/>-->
+<!--        &lt;!&ndash; 身份认证失败，则跳转到登录页面的配置 &ndash;&gt;-->
+<!--        <property name="loginUrl" value="/toLogin"/>-->
+<!--        &lt;!&ndash; 权限认证失败，则跳转到指定页面 &ndash;&gt;-->
+<!--        <property name="unauthorizedUrl" value="error"/>-->
+<!--        &lt;!&ndash; Shiro连接约束配置,即过滤链的定义 &ndash;&gt;-->
+<!--        <property name="filterChainDefinitions">-->
+<!--            <value>-->
+<!--                /toLogin=anon-->
+<!--                /toRegister=anon-->
+<!--                /register*=anon-->
+<!--                /user/login*=anon-->
+<!--                /assert/**=anon-->
+<!--                /plugin/**=anon-->
+<!--                /dist/**=anon-->
+<!--                /**=authc-->
+<!--            </value>-->
+<!--        </property>-->
+<!--    </bean>-->
+
+    <bean id="shiroFilter" class="org.apache.shiro.spring.web.ShiroFilterFactoryBean" depends-on="roleOrFilter">
+        <!-- Shiro的核心安全接口,这个属性是必须的 -->
+        <property name="securityManager" ref="securityManager"/>
+        <!-- 身份认证失败，则跳转到登录页面的配置 -->
+        <property name="loginUrl" value="/toLogin"/>
+        <!-- 权限认证失败，则跳转到指定页面 -->
+        <property name="unauthorizedUrl" value="/error"/>
+        <property name="filters">
+            <map>
+                <entry key="roleOrFilter" value-ref="roleOrFilter"/>
+            </map>
+        </property>
+        <property name="filterChainDefinitions">
+            <value>
+                /toLogin=anon
+                /register*=anon
+                /user/login*=anon
+                /assert/**=anon
+                /plugin/**=anon 
+                /dist/**=anon
+<!--                /Manager/empManage*=roleOrFilter["admin","manager"]-->
+<!--                /Manager/cusManage*=roleOrFilter["admin","manager"]-->
+<!--                /Manager/toVisit*=roleOrFilter["admin","manager"]-->
+                /**=authc
+            </value>
+        </property>
+    </bean>
+
+    <!-- 保证实现了Shiro内部lifecycle函数的bean执行 -->
+    <bean id="lifecycleBeanPostProcessor" class="org.apache.shiro.spring.LifecycleBeanPostProcessor"/>
+
+    <!-- 开启Shiro注解 -->
+    <bean class="org.springframework.aop.framework.autoproxy.DefaultAdvisorAutoProxyCreator" depends-on="lifecycleBeanPostProcessor"/>
+    <bean class="org.apache.shiro.spring.security.interceptor.AuthorizationAttributeSourceAdvisor">
+        <property name="securityManager" ref="securityManager"/>
+    </bean>
+
+<!--    使用注解 未授权跳转-->
+    <bean class="org.springframework.web.servlet.handler.SimpleMappingExceptionResolver">
+        <property name="exceptionMappings">
+            <props>
+                <prop key="org.apache.shiro.authz.UnauthorizedException">error</prop>
+            </props>
+        </property>
+    </bean>
+</beans>
